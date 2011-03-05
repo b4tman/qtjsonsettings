@@ -1,0 +1,21 @@
+QtJsonSettings class for storing application settings in JSON file. Inherits QSettings.
+
+
+Download from gitorious
+git clone --depth 1 http://git.gitorious.org/qtjsonsettings/qtjsonsettings.git
+
+Using
+
+CMake
+Compiled as static library
+
+add_subdirectory(~/projects/qtjsonsettings ${CMAKE_CURRENT_BINARY_DIR}/qtjsonsettings)
+include_directories(~/projects/qtjsonsettings)    
+
+target_link_libraries(${PROJECT_NAME} ${QT_LIBRARIES} 
+  qtjsonsettings)
+
+QMake
+Included as sources
+
+include(~/projects/qtjsonsetting/qtjsonsettings.pri)
