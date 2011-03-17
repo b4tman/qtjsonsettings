@@ -16,7 +16,7 @@
 namespace Json {
     QVariant parse(const QByteArray &data, QString *error = 0);
     QByteArray stringify(const QVariant &variant);
-    QByteArray prettyStringify(const QVariant &variant, int indent, int indent0 = 0);
+    QByteArray prettyStringify(const QVariant &variant, int indent = 4, int indent0 = 0);
 };
 
 #endif // JSON_H
