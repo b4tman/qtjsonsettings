@@ -5,7 +5,7 @@ set(CMAKE_DEBUG_POSTFIX _debug)
 # Declare project
 project(qtjsonsettings)
 
-find_package(Qt4 REQUIRED)
+find_package(Qt5 REQUIRED)
 set(QT_DONTUSE_QTGUI TRUE)
 
 include(${QT_USE_FILE})
@@ -30,14 +30,13 @@ message("You are linking ${PROJECT_NAME}. I hope it makes your life easier.")
 # SOURCE FILES AND DIRECTORIES
 
 # simple sources
-list(APPEND qtjsonsettings_SOURCES qtjsonsettings.cpp json.cpp jsonparser.cpp)
+list(APPEND qtjsonsettings_SOURCES qtjsonsettings.cpp)
 
 # simple headers
-list(APPEND qtjsonsettings_HEADERS json.h)
 list(APPEND qtjsonsettings_Q_HEADERS qtjsonsettings.h)
 
 # if you use Q_OBJECT
-qt4_wrap_cpp(qtjsonsettings_MOC_SOURCES ${qtjsonsettings_Q_HEADERS})
+qt5_wrap_cpp(qtjsonsettings_MOC_SOURCES ${qtjsonsettings_Q_HEADERS})
 
 # COMPILATION
 add_library(${PROJECT_NAME} STATIC

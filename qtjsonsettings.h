@@ -16,9 +16,9 @@ class QIODevice;
 #endif
 
 /**
- * @brief Class for storing application setting in xml file. This class implements QSettings interface.
+ * @brief Class for storing application setting in json file. This class implements QSettings interface.
  *
- * @class QtXmlSettings qtxmlsettings.h
+ * @class QtJsonSettings qtjsonsettings.h
  */
 class QTJSONSETTINGS_EXPORT QtJsonSettings: public QSettings
 {

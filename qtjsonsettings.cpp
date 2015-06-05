@@ -1,10 +1,6 @@
 #include "qtjsonsettings.h"
-
-#include "json.h"
-
 #include <QtDebug>
-
-#include <QtCore/QCoreApplication>
+#include <QJsonDocument>
 
 namespace {
 
@@ -14,9 +10,9 @@ namespace {
         {
         case QVariant::Map:
         {
-            QVariantMap vMap = element.toMap();
-            QVariantMap::ConstIterator it = vMap.constBegin();
-            QVariantMap::ConstIterator end = vMap.constEnd();
+            auto vMap = element.toMap();
+            auto it = vMap.constBegin();
+            auto end = vMap.constEnd();
 
             for (; it != end; ++it)
             {
@@ -88,16 +84,19 @@ const QSettings::Format QtJsonSettings::json_format = QSettings::registerFormat(
 
 bool QtJsonSettings::readJsonFile(QIODevice &device, QSettings::SettingsMap &map)
 {
-    QString error;
-    QVariant parsed = Json::parse(device.readAll(), &error);
-    if (error.isEmpty())
+    QJsonParseError error;
+    auto document = QJsonDocument::fromJson(device.readAll(), &error);
+
+    if (QJsonParseError::NoError == error.error)
     {
-        QString str;
-        processReadKey(str, map, parsed);
+        if (!document.isEmpty()){
+            QString str;
+            processReadKey(str, map, document.toVariant());
+        }
     }
     else
     {
-        qWarning() << error;
+        qWarning() << error.errorString();
     }
 
     return true;
@@ -107,15 +106,15 @@ bool QtJsonSettings::writeJsonFile(QIODevice &device, const QSettings::SettingsM
 {
     QVariant resultMap;
 
-    QSettings::SettingsMap::ConstIterator it = map.constBegin();
-    QSettings::SettingsMap::ConstIterator end = map.constEnd();
+    auto it = map.constBegin();
+    auto end = map.constEnd();
 
     for (; it != end; ++it)
     {
         resultMap = processWriteKey(resultMap, it.key(), it.value());
     };
 
-    device.write(Json::prettyStringify(resultMap, 4));
+    device.write(QJsonDocument::fromVariant(resultMap).toJson());
     return true;
 
 }
