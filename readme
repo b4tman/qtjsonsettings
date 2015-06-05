@@ -1,8 +1,8 @@
 QtJsonSettings class for storing application settings in JSON file. Inherits QSettings.
 
 
-Download from gitorious
-git clone --depth 1 http://git.gitorious.org/qtjsonsettings/qtjsonsettings.git
+Download from github
+git clone https://github.com/b4tman/qtjsonsettings.git
 
 Using
 
